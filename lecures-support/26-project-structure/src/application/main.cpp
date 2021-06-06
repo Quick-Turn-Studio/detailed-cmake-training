@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include <FileLoader.h>
 #include <JsonCameraDataParser.h>
@@ -18,8 +19,6 @@ int main(int argc, char** argv)
     std::string firstArg = argv[1];
 
     const auto fileContent = file::loadTextFile(firstArg);
-
-
 
     return 0;
 }
