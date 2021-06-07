@@ -1,0 +1,2 @@
+1. Implement exporting in file operations lib
+2. Used it in structured project
