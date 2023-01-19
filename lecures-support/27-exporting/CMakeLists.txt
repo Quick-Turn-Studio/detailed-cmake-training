@@ -35,6 +35,9 @@ install(TARGETS ${DYNAMIC_LIB_NAME} ${STATIC_LIB_NAME}
         OBJECTS DESTINATION ext
         PUBLIC_HEADER DESTINATION include/file-loader)
 
+# alternative
+#install(FILES ${HEADER_FILES_TO_INSTALL} DESTINATION include/file-loader)
+
 install(EXPORT FileLoaderTargets
         NAMESPACE FileLoader::
         FILE fileloader-config.cmake
