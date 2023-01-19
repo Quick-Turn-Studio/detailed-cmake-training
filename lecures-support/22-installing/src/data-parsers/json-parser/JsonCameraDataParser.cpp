@@ -1,10 +1,13 @@
 #include "JsonCameraDataParser.h"
 
+#include <nlohmann/json.hpp>
+
 namespace parsers
 {
 
 data::CameraData JsonCameraDataParser::parseContent(const std::string& content)
 {
+    nlohmann::json object;
     return data::CameraData();
 }
 
