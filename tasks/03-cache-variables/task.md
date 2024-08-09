@@ -1,8 +1,10 @@
+# Task 3
+
 Use result of tasks/02-project-structure
 
 Add two flags that will be responsible for:
 * enabling/disabling configuring tests
 * picking between shared/static library for our shared library
 
-Helpers:
-https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry
+Documentation:
+* [set()](https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry)

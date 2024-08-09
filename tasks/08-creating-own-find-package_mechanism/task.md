@@ -1,3 +1,5 @@
+# Task 8 
+
 1. Copy project tasks/05-project-structure here.
 2. Remove code of subproject that you implemented installing in previous task
 3. Implement own Find<package> mechanism in copied project
@@ -10,10 +12,9 @@ You can use
 * IMPORTED_LOCATION - property for location of library
 * INTERFACE_INCLUDE_DIRECTORIES - property for include directories
 
-Reference:
-https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html
-https://cmake.org/cmake/help/latest/command/find_package.html
-
-https://cmake.org/cmake/help/latest/command/find_library.html
-https://cmake.org/cmake/help/latest/command/find_path.html
+Documentation:
+* [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html)
+* [find_package()](https://cmake.org/cmake/help/latest/command/find_package.html)
+* [find_library()](https://cmake.org/cmake/help/latest/command/find_library.html)
+* [find_path()](https://cmake.org/cmake/help/latest/command/find_path.html)
 

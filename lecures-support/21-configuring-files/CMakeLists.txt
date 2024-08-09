@@ -4,14 +4,14 @@ project(ProjectWithDoxygenExample LANGUAGES CXX VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-add_subdirectory(external EXCLUDE_FROM_ALL)
 add_subdirectory(src)
 
 find_package(Doxygen)
 
 if (DOXYGEN_FOUND)
+    set(DOCUMENTATION_DIR ${CMAKE_BINARY_DIR}/doc)
     set(DOXYFILE_PATH ${CMAKE_BINARY_DIR}/Doxyfile)
-#    configure_file(${CMAKE_SOURCE_DIR}/Doxyfile-alternative.in ${DOXYFILE_PATH})
+    # configure_file(${CMAKE_SOURCE_DIR}/Doxyfile-alternative.in ${DOXYFILE_PATH})
     configure_file(${CMAKE_SOURCE_DIR}/Doxyfile.in ${DOXYFILE_PATH})
 
     message(STATUS "Doxyfile prepared: ${DOXYFILE_PATH}")
@@ -22,6 +22,12 @@ if (DOXYGEN_FOUND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMENT "Generating documentation"
             VERBATIM)
-else()
+
+    set_property(
+            TARGET GenerateDoc
+            APPEND
+            PROPERTY ADDITIONAL_CLEAN_FILES "${DOCUMENTATION_DIR}"
+    )
+else ()
     message(STATUS "Doxygen not found")
 endif ()

@@ -1,3 +1,5 @@
+# Task 5
+
 Use result of tasks/03-cache-variables (still in tasks/02-project-structure)
 
 Change one of your static library into dynamic library and make it working for Linux and Windows.
@@ -5,23 +7,27 @@ To do that you need to create definition (macro, eg. LIBRARY_API) that will repr
 
 Example result after resolving macros:
 
-// when function is build in dynamic library
+* when function is build in dynamic library
+
+```c++
 __declspec(dllexport) bool function();
 
 // when class is build in dynamic library
 class __declspec(dllexport) MyClass
 {
 };
+```
 
-// --------------------------------------------------
+when the same function is linked to another target
 
-// when the same function is linked to another target
+```c++
 __declspec(dllimport) bool function();
 
 // when class is build in dynamic library
 class __declspec(dllimport) MyClass
 {
 };
+```
 
-Helpers:
-https://cmake.org/cmake/help/latest/command/target_compile_definitions.html
+Documentation:
+* [target_compile_definitions()](https://cmake.org/cmake/help/latest/command/target_compile_definitions.html)
