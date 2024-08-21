@@ -1,6 +1,6 @@
 # Task 3
 
-Use result of tasks/02-project-structure
+Use result of Task 2 (in tasks/02-project-structure)
 
 Add two flags that will be responsible for:
 * enabling/disabling configuring tests

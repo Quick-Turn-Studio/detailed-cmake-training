@@ -1,6 +1,6 @@
 # Task 5
 
-Use result of tasks/03-cache-variables (still in tasks/02-project-structure)
+Use result of Task 4 (still in tasks/02-project-structure)
 
 Change one of your static library into dynamic library and make it working for Linux and Windows.
 To do that you need to create definition (macro, eg. LIBRARY_API) that will represent one of needed MSVC keyword in Windows case, empty otherwise

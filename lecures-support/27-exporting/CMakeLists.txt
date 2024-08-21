@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(InstallableLibrary)
+project(InstallableLibrary LANGUAGES CXX VERSION 0.3.6)
 
 option(FILE_LOADER_BUILD_SHARED "If ON builds dynamic library" ON)
 option(FILE_LOADER_BUILD_STATIC "If ON builds static library" ON)
@@ -33,17 +33,34 @@ install(TARGETS ${DYNAMIC_LIB_NAME} ${STATIC_LIB_NAME}
         LIBRARY DESTINATION bin
         ARCHIVE DESTINATION lib
         OBJECTS DESTINATION ext
-        PUBLIC_HEADER DESTINATION include/file-loader)
+        PUBLIC_HEADER DESTINATION include/file-loader
+)
 
 # alternative
 #install(FILES ${HEADER_FILES_TO_INSTALL} DESTINATION include/file-loader)
 
 install(EXPORT FileLoaderTargets
         NAMESPACE FileLoader::
-        FILE fileloader-config.cmake
+        FILE fileloader-targets.cmake
         DESTINATION lib/cmake/FileLoader)
 
+include(CMakePackageConfigHelpers)
+configure_package_config_file(fileloader-config.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/fileloader-config.cmake
+        INSTALL_DESTINATION lib/cmake/FileLoader
+)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/fileloader-config.cmake
+        DESTINATION lib/cmake/FileLoader
+)
+
+write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/fileloader-config-version.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMajorVersion
+)
+
 add_custom_target(RunInstall
-    COMMAND ${CMAKE_COMMAND} --build . --target install
-    COMMENT "Running custom install command. Please wait..."
-        )
+        COMMAND ${CMAKE_COMMAND} --build . --target install
+        COMMENT "Running custom install command. Please wait..."
+)
