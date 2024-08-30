@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 project(FunctionsTask LANGUAGES CXX)
 
 function(CreateLibrary LIB_NAME LIB_TYPE LOG SOURCES)

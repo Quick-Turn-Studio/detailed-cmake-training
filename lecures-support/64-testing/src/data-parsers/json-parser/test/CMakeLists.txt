@@ -10,4 +10,5 @@ target_link_libraries(${TEST_NAME} PRIVATE gmock gmock_main)
 target_link_libraries(${TEST_NAME} PRIVATE JsonCameraDataParser)
 
 add_test(NAME ${TEST_NAME}
-        COMMAND ${TEST_NAME})
+        COMMAND ${TEST_NAME} --gtest_output=xml:${TEST_REPORT_DIRECTORY}/${TEST_NAME}.xml
+)

@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.28)
 project(FunctionsTask)
 
-function(CreateLibrary LIB_NAME LIB_TYPE LOG SOURCES)
+function(CreateApplication APP_NAME LOG SOURCES)
     if (LOG)
-        message("Creating library: ${LIB_NAME} from files:")
+        message("Creating application: ${APP_NAME} from files:")
     endif ()
-    add_library(${LIB_NAME} ${LIB_TYPE} ${SOURCES})
+    add_library(${APP_NAME} ${LIB_TYPE} ${SOURCES})
 endfunction()
 
 set(SRC_FILES main.cpp Class.cpp OtherClass.cpp)
 
-CreateLibrary(MyLib STATIC FALSE ${SRC_FILES})
+CreateLibrary(MyLib FALSE ${SRC_FILES})

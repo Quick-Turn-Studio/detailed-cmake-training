@@ -31,3 +31,5 @@ class __declspec(dllimport) MyClass
 
 Documentation:
 * [target_compile_definitions()](https://cmake.org/cmake/help/latest/command/target_compile_definitions.html)
+* [RUNTIME_OUTPUT_DIRECTORY](https://cmake.org/cmake/help/latest/prop_tgt/RUNTIME_OUTPUT_DIRECTORY.html)
+* [CMAKE_RUNTIME_OUTPUT_DIRECTORY](https://cmake.org/cmake/help/latest/prop_tgt/RUNTIME_OUTPUT_DIRECTORY.html)
