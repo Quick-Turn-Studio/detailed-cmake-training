@@ -1,15 +1,20 @@
 //     __ _____ _____ _____
 //  __|  |   __|     |   | |  JSON for Modern C++ (supporting code)
-// |  |  |__   |  |  | | | |  version 3.11.2
+// |  |  |__   |  |  | | | |  version 3.12.0
 // |_____|_____|_____|_|___|  https://github.com/nlohmann/json
 //
-// SPDX-FileCopyrightText: 2013-2022 Niels Lohmann <https://nlohmann.me>
+// SPDX-FileCopyrightText: 2013 - 2025 Niels Lohmann <https://nlohmann.me>
 // SPDX-License-Identifier: MIT
 
 #include "doctest_compatibility.h"
 
 // for some reason including this after the json header leads to linker errors with VS 2017...
 #include <locale>
+
+// skip tests if JSON_DisableEnumSerialization=ON (#4384)
+#if defined(JSON_DISABLE_ENUM_SERIALIZATION) && (JSON_DISABLE_ENUM_SERIALIZATION == 1)
+    #define SKIP_TESTS_FOR_ENUM_SERIALIZATION
+#endif
 
 #define JSON_TESTS_PRIVATE
 #include <nlohmann/json.hpp>
@@ -169,6 +174,7 @@ TEST_CASE("regression tests 1")
         }
     }
 
+#ifndef SKIP_TESTS_FOR_ENUM_SERIALIZATION
     SECTION("pull request #71 - handle enum type")
     {
         enum { t = 0, u = 102};
@@ -191,6 +197,7 @@ TEST_CASE("regression tests 1")
             {"game_type", t}
         }));
     }
+#endif
 
     SECTION("issue #76 - dump() / parse() not idempotent")
     {
@@ -722,7 +729,7 @@ TEST_CASE("regression tests 1")
     {
         std::ifstream f("file_not_found.json");
         json _;
-        CHECK_THROWS_WITH_AS(_ = json::parse(f), "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+        CHECK_THROWS_WITH_AS(_ = json::parse(f), "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
     }
 
     SECTION("issue #367 - calling stream at EOF")
@@ -736,7 +743,7 @@ TEST_CASE("regression tests 1")
         // ss is not at EOF; this yielded an error before the fix
         // (threw basic_string::append). No, it should just throw
         // a parse error because of the EOF.
-        CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+        CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
     }
 
     SECTION("issue #367 - behavior of operator>> should more closely resemble that of built-in overloads")
@@ -745,7 +752,7 @@ TEST_CASE("regression tests 1")
         {
             std::stringstream ss;
             json j;
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("(whitespace)")
@@ -765,7 +772,7 @@ TEST_CASE("regression tests 1")
             CHECK_NOTHROW(ss >> j);
             CHECK(j == 111);
 
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("one value + whitespace")
@@ -788,7 +795,7 @@ TEST_CASE("regression tests 1")
             CHECK_NOTHROW(ss >> j);
             CHECK(j == 333);
 
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("three values")
@@ -803,7 +810,7 @@ TEST_CASE("regression tests 1")
             CHECK_NOTHROW(ss >> j);
             CHECK(j == 333);
 
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("literals without whitespace")
@@ -820,7 +827,7 @@ TEST_CASE("regression tests 1")
             CHECK_NOTHROW(ss >> j);
             CHECK(j == "");
 
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("example from #529")
@@ -833,7 +840,7 @@ TEST_CASE("regression tests 1")
             CHECK_NOTHROW(ss >> j);
             CHECK(j == json({{"three", 3}}));
 
-            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: syntax error while parsing value - unexpected end of input; expected '[', '{', or a literal", json::parse_error&);
+            CHECK_THROWS_WITH_AS(ss >> j, "[json.exception.parse_error.101] parse error at line 1, column 1: attempting to parse an empty input; check that your input string or stream contains the expected JSON", json::parse_error&);
         }
 
         SECTION("second example from #529")
@@ -1203,7 +1210,6 @@ TEST_CASE("regression tests 1")
         CHECK(j["a"] >= 3);
         CHECK(j["a"] >  3);
 
-
         CHECK(!(j["a"] <= 4));
         CHECK(!(j["a"] <  4));
         CHECK(!(j["a"] >= 6));
@@ -1329,10 +1335,10 @@ TEST_CASE("regression tests 1")
         {
             std::ifstream is;
             is.exceptions(
-                is.exceptions()
-                | std::ios_base::failbit
-                | std::ios_base::badbit
-            ); // handle different exceptions as 'file not found', 'permission denied'
+                  is.exceptions()
+                  | std::ios_base::failbit
+                  | std::ios_base::badbit
+              ); // handle different exceptions as 'file not found', 'permission denied'
 
             is.open(TEST_DATA_DIRECTORY "/regression/working_file.json");
             json _;
@@ -1342,10 +1348,10 @@ TEST_CASE("regression tests 1")
         {
             std::ifstream is;
             is.exceptions(
-                is.exceptions()
-                | std::ios_base::failbit
-                | std::ios_base::badbit
-            ); // handle different exceptions as 'file not found', 'permission denied'
+                  is.exceptions()
+                  | std::ios_base::failbit
+                  | std::ios_base::badbit
+              ); // handle different exceptions as 'file not found', 'permission denied'
 
             is.open(TEST_DATA_DIRECTORY "/json_nlohmann_tests/all_unicode.json.cbor",
                     std::ios_base::in | std::ios_base::binary);
@@ -1394,14 +1400,24 @@ TEST_CASE("regression tests 1")
         auto p1 = R"([{"op": "move",
                        "from": "/one/two/three",
                        "path": "/a/b/c"}])"_json;
+#if JSON_DIAGNOSTIC_POSITIONS
+        CHECK_THROWS_WITH_AS(model.patch(p1),
+                             "[json.exception.out_of_range.403] (bytes 0-158) key 'a' not found", json::out_of_range&);
+#else
         CHECK_THROWS_WITH_AS(model.patch(p1),
                              "[json.exception.out_of_range.403] key 'a' not found", json::out_of_range&);
+#endif
 
         auto p2 = R"([{"op": "copy",
                        "from": "/one/two/three",
                        "path": "/a/b/c"}])"_json;
+#if JSON_DIAGNOSTIC_POSITIONS
+        CHECK_THROWS_WITH_AS(model.patch(p2),
+                             "[json.exception.out_of_range.403] (bytes 0-158) key 'a' not found", json::out_of_range&);
+#else
         CHECK_THROWS_WITH_AS(model.patch(p2),
                              "[json.exception.out_of_range.403] key 'a' not found", json::out_of_range&);
+#endif
     }
 
     SECTION("issue #961 - incorrect parsing of indefinite length CBOR strings")
