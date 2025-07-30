@@ -1,4 +1,4 @@
-#include "../JsonCameraDataParser.h"
+#include <JsonCameraDataParser.h>
 
 #include <gtest/gtest.h>
 
@@ -8,7 +8,7 @@ namespace parsers::test
 TEST(TestCase, FailingTest)
 {
     JsonCameraDataParser sut;
-    EXPECT_TRUE(true);
+    FAIL();
 }
 
 } // namespace parsers::test
