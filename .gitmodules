@@ -16,3 +16,15 @@
 [submodule "lecures-support/05-project-structure/external/googletest"]
 	path = lecures-support/05-project-structure/external/googletest
 	url = https://github.com/google/googletest.git
+[submodule "lecures-support/lecures-support/67-presets/external/json"]
+	path = lecures-support/lecures-support/67-presets/external/json
+	url = https://github.com/nlohmann/json.git
+[submodule "lecures-support/lecures-support/67-presets/external/googletest"]
+	path = lecures-support/lecures-support/67-presets/external/googletest
+	url = https://github.com/google/googletest.git
+[submodule "lecures-support/67-presets/external/googletest"]
+	path = lecures-support/67-presets/external/googletest
+	url = https://github.com/google/googletest.git
+[submodule "lecures-support/67-presets/external/json"]
+	path = lecures-support/67-presets/external/json
+	url = https://github.com/nlohmann/json.git

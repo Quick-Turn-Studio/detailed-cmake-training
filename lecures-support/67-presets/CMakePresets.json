@@ -1,0 +1,79 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 0,
+    "patch": 3
+  },
+  "configurePresets": [
+    {
+      "name": "base-config",
+      "cacheVariables": {
+        "ENABLE_TESTS": "OFF",
+        "SHARED_LIBRARY": "ON",
+        "CODE_INSPECTION": "OFF"
+      },
+      "hidden": true
+    },
+    {
+      "name": "Linux-Release",
+      "inherits": ["base-config"],
+      "displayName": "Linux Release",
+      "description": "Linux Release Description",
+      "binaryDir": "${sourceDir}/build-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "condition": {
+        "type":"equals",
+        "lhs":"${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "Linux-Debug",
+      "inherits": ["base-config"],
+      "displayName": "Linux Debug",
+      "description": "Linux Description",
+      "binaryDir": "${sourceDir}/build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type":"equals",
+        "lhs":"${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "Code-Inspection",
+      "inherits": ["base-config"],
+      "displayName": "Linux Code Inspection",
+      "description": "Execute Code Inspection",
+      "binaryDir": "${sourceDir}/build-code-inspection",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CODE_INSPECTION": "ON"
+      },
+      "condition": {
+        "type":"equals",
+        "lhs":"${hostSystemName}",
+        "rhs": "Linux"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-linux-release",
+      "configurePreset": "Linux-Release"
+    },
+    {
+      "name": "build-linux-debug",
+      "configurePreset": "Linux-Debug"
+    },
+    {
+      "name": "build-linux-inspection",
+      "configurePreset": "Code-Inspection"
+    }
+  ]
+}
