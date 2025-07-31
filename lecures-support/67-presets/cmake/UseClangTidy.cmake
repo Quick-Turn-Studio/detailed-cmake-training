@@ -23,15 +23,15 @@ else ()
             COMMAND ${CMAKE_COMMAND} --build . --target all --parallel
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
-#    file(GENERATE
-#            OUTPUT "${CMAKE_BINARY_DIR}/.clang-tidy"
-#            CONTENT "# file to do not inspect generated code in build directory
-#                    Checks: ''
-#                    WarningsAsErrors: ''
-#                    AnalyzeTemporaryDtors: false
-#                    InheritParentConfig: false
-#                    FormatStyle: none"
-#    )
+    file(GENERATE
+            OUTPUT "${CMAKE_BINARY_DIR}/.clang-tidy"
+            CONTENT "# file to do not inspect generated code in build directory
+                    Checks: ''
+                    WarningsAsErrors: ''
+                    AnalyzeTemporaryDtors: false
+                    InheritParentConfig: false
+                    FormatStyle: none"
+    )
 
 endif ()
 

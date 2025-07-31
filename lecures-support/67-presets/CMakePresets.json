@@ -53,8 +53,7 @@
       "binaryDir": "${sourceDir}/build-code-inspection",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CODE_INSPECTION": "ON",
-        "CMAKE_EXPORT_COMPILE_COMMANDS":"ON"
+        "CODE_INSPECTION": "ON"
       },
       "condition": {
         "type":"equals",
