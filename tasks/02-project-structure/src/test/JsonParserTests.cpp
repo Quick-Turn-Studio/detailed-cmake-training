@@ -8,7 +8,7 @@ namespace parsers::test
 TEST(TestCase, FailingTest)
 {
     JsonCameraDataParser sut;
-    EXPECT_TRUE(true);
+    FAIL();
 }
 
 } // namespace parsers::test
