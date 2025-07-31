@@ -4,6 +4,8 @@ project(StructuredProjectExample LANGUAGES CXX VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
+include(cmake/UseClangTidy.cmake)
+
 add_subdirectory(external EXCLUDE_FROM_ALL)
 add_subdirectory(src)
 

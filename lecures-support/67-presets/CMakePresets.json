@@ -10,7 +10,8 @@
       "name": "base-config",
       "cacheVariables": {
         "ENABLE_TESTS": "OFF",
-        "SHARED_LIBRARY": "ON"
+        "SHARED_LIBRARY": "ON",
+        "CODE_INSPECTION": "OFF"
       },
       "hidden": true
     },
@@ -45,14 +46,15 @@
       }
     },
     {
-      "name": "Code-Coverage",
+      "name": "Code-Inspection",
       "inherits": ["base-config"],
-      "displayName": "Linux Code Coverage",
-      "description": "Execute Code Coverage",
-      "binaryDir": "${sourceDir}/build-coverage",
+      "displayName": "Linux Code Inspection",
+      "description": "Execute Code Inspection",
+      "binaryDir": "${sourceDir}/build-code-inspection",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CODE_COVERAGE": "ON"
+        "CODE_INSPECTION": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS":"ON"
       },
       "condition": {
         "type":"equals",
@@ -71,8 +73,8 @@
       "configurePreset": "Linux-Debug"
     },
     {
-      "name": "build-linux-coverage",
-      "configurePreset": "Code-Coverage"
+      "name": "build-linux-inspection",
+      "configurePreset": "Code-Inspection"
     }
   ]
 }

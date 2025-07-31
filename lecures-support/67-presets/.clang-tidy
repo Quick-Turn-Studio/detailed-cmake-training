@@ -1,0 +1,5 @@
+Checks: 'clang-analyzer-*,modernize-*,readability-*,performance-*,bugprone-*'
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
+FormatStyle: file
+InheritParentConfig: false
