@@ -3,7 +3,8 @@
 
 #include "FileLoader.h"
 #include "JsonCameraDataParser.h"
-#include "SimpleServerAddressProvider.h"
+
+#include <SimpleServerAddressProvider.h>
 
 std::unique_ptr<parsers::ICameraDataParser> createParserFactory()
 {
