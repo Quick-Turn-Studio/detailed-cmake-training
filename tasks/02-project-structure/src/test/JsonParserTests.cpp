@@ -1,6 +1,6 @@
-#include "../JsonCameraDataParser.h"
-
 #include <gtest/gtest.h>
+
+#include "../Camera/JsonCameraDataParser.h"
 
 namespace parsers::test
 {

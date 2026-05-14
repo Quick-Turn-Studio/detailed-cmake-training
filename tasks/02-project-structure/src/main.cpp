@@ -1,10 +1,10 @@
 #include <iostream>
 #include <memory>
 
-#include "FileLoader.h"
-#include "JsonCameraDataParser.h"
-
+#include <FileLoader.h>
 #include <SimpleServerAddressProvider.h>
+
+#include <JsonCameraDataParser.h>
 
 std::unique_ptr<parsers::ICameraDataParser> createParserFactory()
 {
