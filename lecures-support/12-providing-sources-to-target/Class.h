@@ -1,0 +1,16 @@
+//
+// Created by Sławomir Grabowski on 14/05/2026.
+//
+
+#ifndef PROVIDINGSOURCESTOTARGET_CLASS_H
+#define PROVIDINGSOURCESTOTARGET_CLASS_H
+
+
+
+class Class {
+
+};
+
+
+
+#endif //PROVIDINGSOURCESTOTARGET_CLASS_H

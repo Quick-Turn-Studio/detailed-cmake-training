@@ -1,18 +1,7 @@
-set(APP_NAME Application)
-set(TEST_NAME Tests)
-
-project(${APP_NAME})
-
 add_subdirectory(ServerProviders)
 add_subdirectory(FileUtils)
 add_subdirectory(Camera)
-aux_source_directory(. SRC_FILES)
-add_executable(${APP_NAME} ${SRC_FILES})
-target_link_libraries(${APP_NAME} PRIVATE namespace::ServerProviders)
-target_link_libraries(${APP_NAME} PRIVATE namespace::FileUtils)
-target_link_libraries(${APP_NAME} PRIVATE namespace::Camera)
+add_subdirectory(Application)
 
 
-aux_source_directory(test TEST_FILES)
-add_executable(${TEST_NAME} ${TEST_FILES} ${SRC_FILES})
-target_link_libraries(${TEST_NAME} PRIVATE gmock gmock_main)
+
